@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "9090:80"  # Cambié a 9090 porque mencionaste que usas este puerto
+      - "80:80"  # Cambié a 9090 porque mencionaste que usas este puerto
     volumes:
       - ./:/var/www/html
     depends_on:
