@@ -1,0 +1,5 @@
+/vendedor 
+/node
+/.env
+/docker-compose.yml
+mysql-data/
