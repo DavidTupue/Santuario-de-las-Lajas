@@ -1,4 +1,4 @@
-CREATE DATABASE santuario_web;
+CREATE DATABASE mi_base_de_datos;
 USE santuario_web;
 
 CREATE TABLE comentarios (
