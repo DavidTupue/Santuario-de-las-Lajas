@@ -6,29 +6,39 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "80:80"
+      - "9090:80"  # Cambié a 9090 porque mencionaste que usas este puerto
     volumes:
       - ./:/var/www/html
     depends_on:
       - mysql
+    networks:
+      - las_lajas_web_site
     environment:
       - MYSQL_HOST=mysql
-      - MYSQL_DATABASE=mi_base_de_datos
-      - MYSQL_USER=usuario
-      - MYSQL_PASSWORD=contraseña
+      - MYSQL_DATABASE=santuario_web
+      - MYSQL_USER=usuario_david
+      - MYSQL_PASSWORD=1234
 
   mysql:
-    image: mysql:8.0
+    image: mysql:5.7
+    container_name: basedatos_web
+    restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD=contraseña_root
-      - MYSQL_DATABASE=mi_base_de_datos
-      - MYSQL_USER=usuario
-      - MYSQL_PASSWORD=contraseña
+      - MYSQL_ROOT_PASSWORD=1234
+      - MYSQL_DATABASE=santuario_web
+      - MYSQL_USER=usuario_david
+      - MYSQL_PASSWORD=1234
     volumes:
       - mysql-data:/var/lib/mysql
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
     ports:
-      - "3306:3306"  # Remueve esta línea si no quieres exponer MySQL fuera del contenedor
+      - "3306:3306"
+    networks:
+      - las_lajas_web_site
 
 volumes:
   mysql-data:
+
+networks:
+  las_lajas_web_site:
+    name: las_lajas_web_site
