@@ -1,14 +1,14 @@
 version: '3.8'
 
 services:
-  php:
+  app:
     build:
       context: .
       dockerfile: Dockerfile
     ports:
       - "80:80"
     volumes:
-      - .:/var/www/html
+      - ./var/www/html
     depends_on:
       - mysql
     environment:
@@ -17,17 +17,18 @@ services:
       - MYSQL_USER=usuario
       - MYSQL_PASSWORD=contraseña
 
-mysql:
+  mysql:
     image: mysql:8.0
     environment:
-      MYSQL_DATABASE: mi_base_de_datos
-      MYSQL_USER: usuario
-      MYSQL_PASSWORD: contraseña
-      MYSQL_ROOT_PASSWORD: contraseña_root
+      - MYSQL_ROOT_PASSWORD=contraseña_root
+      - MYSQL_DATABASE=mi_base_de_datos
+      - MYSQL_USER=usuario
+      - MYSQL_PASSWORD=contraseña
     volumes:
       - mysql-data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
     ports:
-      - "3306:3306"
+      - "3306:3306"  # Remueve esta línea si no quieres exponer MySQL fuera del contenedor
 
 volumes:
- mysql-data:
+  mysql-data:
