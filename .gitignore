@@ -1,5 +1,5 @@
 /vendedor 
-/node
+/node_modules
 /.env
 /docker-compose.yml
 mysql-data/
